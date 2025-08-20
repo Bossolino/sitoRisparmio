@@ -1,9 +1,9 @@
 import index from '@/pages/index.vue'
-import router from '@/router/index'
+import { createRouter, createMemoryHistory } from 'vue-router/auto'
+
 
 export const routes = [
-  { path: '/', component: index },
-  { path: '/about', component: AboutView },
+  { path: '/', component: index }
 ]
 
 export const router = createRouter({
