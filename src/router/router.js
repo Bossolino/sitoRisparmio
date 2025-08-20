@@ -1,7 +1,8 @@
+import index from '@/pages/index.vue'
 import router from '@/router/index'
 
 export const routes = [
-  { path: '/', component: HomeView },
+  { path: '/', component: index },
   { path: '/about', component: AboutView },
 ]
 
