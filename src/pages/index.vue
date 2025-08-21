@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <Card titolo="+" class="card" @click="router.replace('/')"></Card>
+        <Card titolo="+" class="card" path="/"></Card>
       </v-col>
     </v-row>
   </v-container>
@@ -10,6 +10,18 @@
 
 <script setup>
 import {router} from '@/router/router'
+import axios from 'axios';
+
+axios({
+  url: "",
+  headers: "Application/json"
+}.then(response => {
+  console.log(response)
+}).catch(error =>{
+  console.log(error)
+})
+);
+
 </script>
 <style>
 

@@ -10,3 +10,8 @@ export const router = createRouter({
   history: createMemoryHistory(),
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(to.fullPath);
+  return next()
+})
