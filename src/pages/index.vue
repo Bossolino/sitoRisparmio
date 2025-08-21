@@ -1,9 +1,12 @@
 <template>
   <v-container>
-    <p v-if="!progTrovati.value">Nessun progetto trovato, creane uno cliccando su '+'.</p>
+    <p v-if="progTrovati.value">Nessun progetto trovato, creane uno cliccando su '+'.</p>
+    <p v-if="!progTrovati.value">Scegli un progetto o creane uno.</p>
     <v-row>
+      <Card v-for="prog in progTrovati" :key="prog" :titolo="prog.TITOLO" :path="'/'+prog.TITOLO" classTitolo="card" :obbiettivo="prog.OBBIETTIVO"></Card>
       <v-col>
-        <Card titolo="+" class="card" path="/" idTitolo="new"></Card>
+        <!-- <Card titolo="+" class="card" path="/create" idTitolo="new"></Card> -->
+        <v-card to="create" title="+" id="new"/>
       </v-col>
     </v-row>
   </v-container>
@@ -23,11 +26,19 @@ onMounted(()=>{
 <style>
 
 .card{
-  width: 10vw;
-  height: 5vh;
-  text-align: center;
+  width: fit-content;
+  /* height: 5vh;
+  text-align: center; */
 }
 
+.card:hover{
+  color: lightblue;
+  border: 3px solid lightblue;
+  transition: all 0.1s ease-in-out;
+}
+#new {
+  width: fit-content;
+}
 #new:hover{
   color: green;
   border: 3px solid green;
