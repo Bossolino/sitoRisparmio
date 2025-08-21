@@ -6,11 +6,12 @@ import Fonts from 'unplugin-fonts/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 
 // Utilities
-import { defineConfig } from 'vite'
+import { build, defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/sitoRisparmio/',
   plugins: [
     VueRouter(),
     Vue({
@@ -36,6 +37,7 @@ export default defineConfig({
       },
     }),
   ],
+  build: { outDir: 'docs' },
   optimizeDeps: {
     exclude: [
       'vuetify',
