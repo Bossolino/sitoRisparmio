@@ -6,10 +6,15 @@ import dashboardProg from './pages/dashboardProg.vue'
 export const progTrovati = ref(false)
 
 export const progetti = ref({})
-export const nProgetto = ref(0)
-export const obbiettivo = ref(0)
+// export const nProgetto = ref(0)
+// export const obbiettivo = ref(0)
+
 
 export const nProgScelto = ref(0)
+export const titProgScelto = ref("")
+export const dataInizioScelto = ref("")
+export const objProgScelto = ref(0)
+export const saldoProgScelto = ref(0)
 
 
 export function getProgetti(){
@@ -17,7 +22,9 @@ export function getProgetti(){
         .then(response=>{
             console.log(response)
             if (response.data) {
-                progTrovati.value = response.data;
+                progTrovati.value = true;
+                progetti.value = response.data;
+                console.log(progetti.value)
                 response.data.map(prog => {
                     router.addRoute({path: `/${prog.TITOLO}`, component: dashboardProg, name: `${prog.TITOLO}` });
                     console.log(router.getRoutes())

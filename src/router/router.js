@@ -1,5 +1,6 @@
 import { createRouter, createMemoryHistory } from 'vue-router/auto'
 import { components } from 'vuetify/dist/vuetify.js'
+import app from '../App.vue'
 
 import index from '../pages/index.vue'
 import create from '../pages/create.vue'
@@ -15,6 +16,6 @@ export const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to.fullPath);
+  // console.log(to.fullPath);
   return next()
 })
