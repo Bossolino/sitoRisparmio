@@ -1,7 +1,12 @@
 <template>
   <v-container>
-    <p v-if="!progTrovati">Nessun progetto trovato, creane uno cliccando su '+'.</p>
-    <p v-if="progTrovati">Scegli un progetto o creane uno.</p>
+    <v-row>
+      <v-alert v-if="notification.value==!{}" closable :icon='"$"+notification.value.status' :title="notification.value.status" :text="notification.value.messaggio" :type="notification.value.status" :color="notification.value.status"></v-alert>
+    </v-row>
+    <v-row>
+      <p v-if="!progTrovati">Nessun progetto trovato, creane uno cliccando su '+'.</p>
+      <p v-if="progTrovati">Scegli un progetto o creane uno.</p>
+    </v-row>
     <v-row>
       <Card v-for="prog in progetti" :key="prog" :titolo="prog.TITOLO" :path="'/'+prog.TITOLO" classTitolo="card" :obbiettivo="prog.OBBIETTIVO"></Card>
       <v-col>
@@ -15,7 +20,7 @@
 <script setup>
 import {router} from '@/router/router'
 import axios from 'axios';
-import { getProgetti, progTrovati } from '@/varGlob';
+import { getProgetti, progTrovati, notification } from '@/varGlob';
 import { onMounted } from 'vue';
 import { progetti } from '../varGlob';
 

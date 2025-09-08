@@ -2,6 +2,7 @@ import {ref} from 'vue'
 import axios from 'axios'
 import { router } from './router/router'
 import dashboardProg from './pages/dashboardProg.vue'
+import { no } from 'vuetify/locale'
 
 export const progTrovati = ref(false)
 
@@ -15,6 +16,7 @@ export const titProgScelto = ref("")
 export const dataInizioScelto = ref("")
 export const objProgScelto = ref(0)
 export const saldoProgScelto = ref(0)
+export const notification = ref({})
 
 
 export function getProgetti(){
@@ -50,20 +52,25 @@ export function aggSaldo(idProg, tipoAgg, importoAgg){
         method: 'post',
         url: 'https://f18superhornet.altervista.org/aggSaldo.php',
         data: {
-
             id: idProg,
             tipo: tipoAgg,
-            importo: importoAgg
-            
-        }.then(response=>{
-
-            console.log(response)
-
-        }).catch(error=>{
-
-            console.error(error)
-
-        })
+            importo: importoAgg,
+        }
+    }).then(response=>{
+        console.log(response);
+        // notification.value = {
+        //     "status": `${response.data.status}`,
+        //     "messaggio": `${response.data.messaggio}`
+        // };
+        location.reload();
+    }).catch(error=>{
+        console.error(error);
+        // notification.value = {
+        //     "status": `error`,
+        //     "messaggio": `${error.message
+        //     }`
+        // };
+        
     })
 
 }

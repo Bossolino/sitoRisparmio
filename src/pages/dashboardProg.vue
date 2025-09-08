@@ -1,5 +1,5 @@
 <script setup>
-import { dataInizioScelto, nProgScelto, objProgScelto, titProgScelto, saldoProgScelto, aggSaldo } from '../varGlob';
+import { dataInizioScelto, nProgScelto, objProgScelto, titProgScelto, saldoProgScelto, aggSaldo, notification } from '../varGlob';
 import HomeBtn from '@/components/HomeBtn.vue';
 import TransactionViewer from '../components/TransactionViewer.vue';
 import { ref, watch } from 'vue';
@@ -8,6 +8,8 @@ const newImporto = ref(1.00);
 const tipoImporto = ref("");
 
 const btnDisabled = ref(true);
+
+const percSaldo = ref(Math.round((saldoProgScelto.value/objProgScelto.value)*10000)/100);
 
 function setTipoImporto(tipo){
     if (tipoImporto.value === tipo) {
@@ -48,6 +50,9 @@ watch(tipoImporto, (newVal, oldVal) => {
 </script>
 <template>
     <v-container>
+        <v-row>
+            <v-alert v-if="notification.value==!{}" closable :icon='"$"+notification.value.status' :title="notification.value.status" :text="notification.value.messaggio" :type="notification.value.status" :color="notification.value.status"></v-alert>
+        </v-row>
         <HomeBtn />
         <v-card>
             <v-card-title>{{ titProgScelto }}</v-card-title>
@@ -55,6 +60,30 @@ watch(tipoImporto, (newVal, oldVal) => {
             <v-card-text>Data creazione: {{ dataInizioScelto }}</v-card-text>
             <v-card-text>Obbiettivo: {{ objProgScelto }}€</v-card-text>
             <v-card-text>Saldo attuale: {{ saldoProgScelto }}€</v-card-text>
+        </v-card>
+    </v-container>
+    <v-container>
+        <v-card>
+            <v-card-title>
+                <h4>Linea progressione</h4>
+            </v-card-title>
+            <v-card-text>
+                <p>Sei al {{ percSaldo }}% di {{ objProgScelto }}€.</p>
+            </v-card-text>
+            <v-card-text>
+                <v-row>
+                    <v-col class="text-end">
+                        <p>0</p>
+                    </v-col>
+                    <v-col>
+                        <v-progress-linear color="primary" :model-value="percSaldo" :height="20"><strong>{{ percSaldo }}%</strong></v-progress-linear>
+                    </v-col>
+                    <v-col>
+                        <p>{{ objProgScelto }}</p>
+                    </v-col>
+                </v-row>
+                
+            </v-card-text>
         </v-card>
     </v-container>
     <v-container>
@@ -79,7 +108,7 @@ watch(tipoImporto, (newVal, oldVal) => {
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col>
+                        <v-col class="text-center">
                             <v-btn id="btnMod" style="border: 1px solid blue;" :disabled="btnDisabled" @click="setImporto()">Modifica importo</v-btn>
                         </v-col>
                     </v-row>
