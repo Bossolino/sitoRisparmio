@@ -44,3 +44,26 @@ export function creaProgetto(newTitolo, newPrezzo){
             prezzo: newPrezzo
         }).then(response=>{console.log(response)}).catch(error=>{console.error(error)})
 }
+
+export function aggSaldo(idProg, tipoAgg, importoAgg){
+    axios({
+        method: 'post',
+        url: 'https://f18superhornet.altervista.org/aggSaldo.php',
+        data: {
+
+            id: idProg,
+            tipo: tipoAgg,
+            importo: importoAgg
+            
+        }.then(response=>{
+
+            console.log(response)
+
+        }).catch(error=>{
+
+            console.error(error)
+
+        })
+    })
+
+}
